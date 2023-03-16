@@ -17,7 +17,7 @@
             <!-- Registration Page Area Start Here -->
             <div class="registration-page-area bg-secondary section-space-bottom">
                 <div class="container">
-                    <h2 class="title-section">Registration</h2>
+                    <h2 class="title-section">Kayıt ol</h2>
                     <div class="registration-details-area inner-page-padding">
                   
                   <?php 

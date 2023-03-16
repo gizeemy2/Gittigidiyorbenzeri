@@ -29,6 +29,15 @@
                 </div>
                     
                 <?php }
+                 if ($_GET['durum']=="exit") {?>
+
+                    <div class="alert alert-success">
+                        <strong>Bilgi!</strong> Çıkış Yapıldı
+                    </div>
+                        
+                    <?php }
+                    
+                
                 ?>
 
 

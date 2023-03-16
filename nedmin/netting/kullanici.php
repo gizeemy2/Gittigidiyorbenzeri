@@ -134,7 +134,8 @@ if (isset($_POST['musterigiris'])) {
 
 	if ($say==1) {
 
-		echo $_SESSION['userkullanici_mail']=$kullanici_mail;
+		 $_SESSION['userkullanici_mail']=$kullanici_mail;
+		 
 
 		header("Location:../../index.php?durum=girisbasarili");
 		exit;
@@ -146,7 +147,7 @@ if (isset($_POST['musterigiris'])) {
 	} else {
 
 
-		header("Location:../../login?durum=hata");
+		header("Location:../../login?durum=hata"); 
 
 	}
 
@@ -154,7 +155,26 @@ if (isset($_POST['musterigiris'])) {
 }
 
 
+	if (isset($_POST['musteribilgiguncelle'])) {
+		$kullaniciguncelle = $db->prepare("UPDATE kullanici SET
+		kullanici_ad=:kullanici_ad,
+		kullanici_soyad=:kullanici_soyad,
+		kullanici_gsm=:kullanici_gsm 
+		WHERE kullanici_id={$_SESSION['userkullanici_id']}");
 
+		$update = $kullaniciguncelle->execute(array(
+			'kullanici_ad' =>htmlspecialchars($_POST['kullanici_ad']),
+			'kullanici_soyad' =>htmlspecialchars($_POST['kullanici_soyad']),
+			'kullanici_gsm' =>htmlspecialchars($_POST['kullanici_gsm'])
+
+		));
+		if ($update) {
+			Header("Location:../../hesabim?durum=ok");
+		}else{
+			Header("Location:../../hesabim?durum=hata");
+		}
+
+	}
 
 
 

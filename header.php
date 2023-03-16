@@ -11,13 +11,23 @@ $ayarsor->execute(array(
 	));
 $ayarcek=$ayarsor->fetch(PDO::FETCH_ASSOC);
 
+if (isset($_SESSION['userkullanici_mail'])) {
 
-// $kullanicisor=$db->prepare("SELECT * FROM kullanici where kullanici_mail=:mail");
-// $kullanicisor->execute(array(
-//   'mail' => $_SESSION['kullanici_mail']
-//   ));
-// $say=$kullanicisor->rowCount();
-// $kullanicicek=$kullanicisor->fetch(PDO::FETCH_ASSOC);
+    $kullanicisor=$db->prepare("SELECT * FROM kullanici where kullanici_mail=:mail");
+    $kullanicisor->execute(array(
+      'mail' => $_SESSION['userkullanici_mail']
+      ));
+    $say=$kullanicisor->rowCount();
+    $kullanicicek=$kullanicisor->fetch(PDO::FETCH_ASSOC);
+
+
+    if (!isset($_SESSION['userkullanici_id'])) {
+        $_SESSION['userkullanici_id']=$kullanicicek['kullanici_id'];
+    }
+
+
+}
+
 
 
 ?>
@@ -97,9 +107,13 @@ $ayarcek=$ayarsor->fetch(PDO::FETCH_ASSOC);
                                 </div> 
                                 <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12">
                                 <ul class="profile-notification">                                            
-                                        <li>
+                                        <!-- <li>
                                             <div class="notify-contact"><span>Need help?</span> Talk to an expert: +61 3 8376 6284</div>
-                                        </li>
+                                        </li> -->
+                                     
+                                        <?php  if (isset($_SESSION['userkullanici_mail']) ){
+                                                        ?>
+                                     
                                         <li>
                                             <div class="notify-notification">
                                                 <a href="#"><i class="fa fa-bell-o" aria-hidden="true"></i><span>8</span></a>
@@ -116,6 +130,8 @@ $ayarcek=$ayarsor->fetch(PDO::FETCH_ASSOC);
                                                             <i class="fa fa-bell-o" aria-hidden="true"></i>
                                                         </div>
                                                     </li>
+
+
                                                     <li>
                                                         <div class="notify-notification-img">
                                                             <img class="img-responsive" src="img\profile\2.png" alt="profile">
@@ -128,6 +144,8 @@ $ayarcek=$ayarsor->fetch(PDO::FETCH_ASSOC);
                                                             <i class="fa fa-bell-o" aria-hidden="true"></i>
                                                         </div>
                                                     </li>
+
+
                                                     <li>
                                                         <div class="notify-notification-img">
                                                             <img class="img-responsive" src="img\profile\3.png" alt="profile">
@@ -140,6 +158,8 @@ $ayarcek=$ayarsor->fetch(PDO::FETCH_ASSOC);
                                                             <i class="fa fa-bell-o" aria-hidden="true"></i>
                                                         </div>
                                                     </li>
+
+                                                    
                                                 </ul>
                                             </div>
                                         </li>
@@ -189,97 +209,12 @@ $ayarcek=$ayarsor->fetch(PDO::FETCH_ASSOC);
                                                 </ul>
                                             </div>
                                         </li>
-                                        <li>
-                                            <div class="cart-area">
-                                                <a href="#"><i class="fa fa-shopping-cart" aria-hidden="true"></i><span>2</span></a>
-                                                <ul>
-                                                    <li>
-                                                        <div class="cart-single-product">
-                                                            <div class="media">
-                                                                <div class="pull-left cart-product-img">
-                                                                    <a href="#">
-                                                                        <img class="img-responsive" alt="product" src="img\product\more2.jpg">
-                                                                    </a>
-                                                                </div>
-                                                                <div class="media-body cart-content">
-                                                                    <ul>
-                                                                        <li>
-                                                                            <h1><a href="#">Product Title Here</a></h1>
-                                                                            <h2><span>Code:</span> STPT600</h2>
-                                                                        </li>
-                                                                        <li>
-                                                                            <p>X 1</p>
-                                                                        </li>
-                                                                        <li>
-                                                                            <p>$49</p>
-                                                                        </li>
-                                                                        <li>
-                                                                            <a class="trash" href="#"><i class="fa fa-trash-o"></i></a>
-                                                                        </li>
-                                                                    </ul>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </li>
-                                                    <li>
-                                                        <div class="cart-single-product">
-                                                            <div class="media">
-                                                                <div class="pull-left cart-product-img">
-                                                                    <a href="#">
-                                                                        <img class="img-responsive" alt="product" src="img\product\more3.jpg">
-                                                                    </a>
-                                                                </div>
-                                                                <div class="media-body cart-content">
-                                                                    <ul>
-                                                                        <li>
-                                                                            <h1><a href="#">Product Title Here</a></h1>
-                                                                            <h2><span>Code:</span> STPT460</h2>
-                                                                        </li>
-                                                                        <li>
-                                                                            <p>X 1</p>
-                                                                        </li>
-                                                                        <li>
-                                                                            <p>$75</p>
-                                                                        </li>
-                                                                        <li>
-                                                                            <a class="trash" href="#"><i class="fa fa-trash-o"></i></a>
-                                                                        </li>
-                                                                    </ul>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </li>                                                   
-                                                    <li>
-                                                        <table class="table table-bordered sub-total-area">
-                                                            <tbody>
-                                                                <tr>
-                                                                    <td>Total</td>
-                                                                    <td>$124</td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>Discount</td>
-                                                                    <td>$30</td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>Vat(20%)</td>
-                                                                    <td>$18.8</td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>Sub Total</td>
-                                                                    <td>$112.8</td>
-                                                                </tr>                                                                 
-                                                            </tbody>
-                                                        </table>
-                                                    </li>
-                                                    <li>
-                                                        <ul class="cart-checkout-btn">
-                                                            <li><a href="cart.htm" class="btn-find"><i class="fa fa-shopping-cart" aria-hidden="true"></i>Go to Cart</a></li>
-                                                            <li><a href="check-out.htm" class="btn-find"><i class="fa fa-share" aria-hidden="true"></i>Go to Checkout</a></li>
-                                                        </ul>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </li>
+                                 
+                                    <?php } ?>                 
+                                    <?php  if (isset($_SESSION['userkullanici_mail']) ){
+                                        
+                                    ?>
+
                                         <li>
                                             <div class="user-account-info">
                                                 <div class="user-account-info-controler">
@@ -287,7 +222,7 @@ $ayarcek=$ayarsor->fetch(PDO::FETCH_ASSOC);
                                                         <img class="img-responsive" src="img\profile\4.png" alt="profile">
                                                     </div>
                                                     <div class="user-account-title">
-                                                        <div class="user-account-name">Mike Hussy</div>
+                                                        <div class="user-account-name"><?php echo $kullanicicek['kullanici_ad']." ".substr($kullanicicek['kullanici_soyad'],0,1) ?></div>
                                                         <div class="user-account-balance">$171.00</div>
                                                     </div>
                                                     <div class="user-account-dropdown">
@@ -295,18 +230,18 @@ $ayarcek=$ayarsor->fetch(PDO::FETCH_ASSOC);
                                                     </div>
                                                 </div>
                                                 <ul>
-                                                    <li><a href="#">Profile Page</a></li>
-                                                    <li><a href="#">Portfolio</a></li>
-                                                    <li><a href="#">Account Setting</a></li>
-                                                    <li><a href="#">Downloads</a></li>
-                                                    <li><a href="#">Wishlist</a></li>
-                                                    <li><a href="#">Upload Item</a></li>
-                                                    <li><a href="#">Statement</a></li>
-                                                    <li><a href="#">Withdraws</a></li>
+                                                    <li><a href="hesabim">Hesap Bilgilerim</a></li>
+                                                   
                                                 </ul>
                                             </div>
                                         </li>
-                                        <li><a class="apply-now-btn" href="index.htm" id="logout-button">Logout</a></li>
+                                        <li><a class="apply-now-btn" href="logout.php" id="logout-button">Logout</a></li>
+                                   <?php }else {?> 
+                                    <li><a class="apply-now-btn hidden-on-mobile" href="login">Üye Girişi</a></li>
+                                    <li><a class="apply-now-btn-color hidden-on-mobile" href="register">Kayıt</a></li>
+  
+                                <?php }    ?>
+
                                     </ul>
                                 </div>                          
                             </div>                          
