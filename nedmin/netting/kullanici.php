@@ -177,5 +177,83 @@ if (isset($_POST['musterigiris'])) {
 	}
 
 
+	if (isset($_POST['musteriadresguncelle'])) {
+		$kullaniciguncelle = $db->prepare("UPDATE kullanici SET
+		kullanici_tip=:kullanici_tip,
+		kullanici_tc=:kullanici_tc,
+		kullanici_unvan=:kullanici_unvan,
+		kullanici_vdaire=:kullanici_vdaire,
+		kullanici_vno=:kullanici_vno,
+		kullanici_adres=:kullanici_adres,
+		kullanici_il=:kullanici_il,
+		kullanici_ilce=:kullanici_ilce
+		WHERE kullanici_id={$_SESSION['userkullanici_id']}");
+
+		$update = $kullaniciguncelle->execute(array(
+			'kullanici_tip' =>htmlspecialchars($_POST['kullanici_tip']),
+			'kullanici_tc' =>htmlspecialchars($_POST['kullanici_tc']),
+			'kullanici_unvan' =>htmlspecialchars($_POST['kullanici_unvan']),
+			'kullanici_vdaire' =>htmlspecialchars($_POST['kullanici_vdaire']),
+			'kullanici_vno' =>htmlspecialchars($_POST['kullanici_vno']),
+			'kullanici_adres' =>htmlspecialchars($_POST['kullanici_adres']),
+			'kullanici_il' =>htmlspecialchars($_POST['kullanici_il']),
+			'kullanici_ilce' =>htmlspecialchars($_POST['kullanici_ilce'])
+
+		));
+		if ($update) {
+			Header("Location:../../adres-bilgileri?durum=ok");
+		}else{
+			Header("Location:../../adres-bilgileri?durum=hata");
+		}
+
+	}
+
+	
+	if (isset($_POST['musterisifreguncelle'])) {
+ 
+
+		$kullanici_eskipassword = htmlspecialchars($_POST['kullanici_eskipassword']);
+		$kullanici_passwordone = htmlspecialchars($_POST['kullanici_passwordone']);
+		$kullanici_passwordtwo = htmlspecialchars($_POST['kullanici_passwordtwo']);
+
+		$kullanici_password=md5($kullanici_eskipassword);
+		$kullanicisor=$db->prepare("SELECT * FROM kullanici where kullanici_password=:password");
+		$kullanicisor->execute(array(
+			'password'=>$kullanici_password
+		));
+
+		$say= $kullanicisor->rowCount();
+		if ($say==0) {
+			Header("Location:../../sifre-guncelle?durum=eskisifrehata");
+			exit;
+		}
+
+
+		if ($kullanici_passwordone==$kullanici_passwordtwo) {
+			if (strlen($kullanici_passwordone)>=6) {
+
+
+				$kullaniciguncelle = $db->prepare("UPDATE kullanici SET
+				kullanici_password=:kullanici_password,
+		
+				WHERE kullanici_id={$_SESSION['userkullanici_id']}");
+		
+				$update = $kullaniciguncelle->execute(array(
+					'kullanici_password' => $kullanici_password
+				
+		
+				));
+				if ($update) {
+					Header("Location:../../sifre-guncelle?durum=ok");
+				}else{
+					Header("Location:../../sifre-guncelle?durum=hata");
+				}
+		
+
+			}
+		}
+	}
+
+
 
  ?>

@@ -1,5 +1,10 @@
-﻿<?php require_once("header.php") ?>
-
+﻿
+<?php require_once("header.php") ?>
+<?php    
+ if (!isset($_SESSION['userkullanici_id'])) {
+ Header("Location:404.php");
+ exit;   
+}?>
                 <!-- Inner Page Banner Area Start Here -->
             <div class="pagination-area bg-secondary">
                 <div class="container">
@@ -16,8 +21,26 @@
 
                     <div class="row settings-wrapper">
 
-                    <?php require_once 'hesap-sidebar.php' ?>
-                      
+                    <?php
+                    if ($_GET['durum']=="hata") {?>
+
+                    <div class="alert alert-danger">
+                        <strong>Hata!</strong>İşlem Başarısız
+                    </div>
+                        
+                    <?php }
+                    if ($_GET['durum']=="ok") {?>
+
+                        <div class="alert alert-success">
+                            <strong>Bilgi!</strong> Kayıtlar Güncellendi
+                        </div>
+                            
+                        <?php }
+                        
+
+                    ?>
+   
+                    <?php require_once 'hesap-sidebar.php' ?>                   
                         <div class="col-lg-9 col-md-9 col-sm-8 col-xs-12"> 
                             <form class="form-horizontal" id="personal-info-form" action="nedmin/netting/kullanici.php" method="POST">
                                 <div class="settings-details tab-content">

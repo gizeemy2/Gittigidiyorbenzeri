@@ -56,6 +56,7 @@ if (isset($_SESSION['userkullanici_mail'])) {
 
         <!-- Animate CSS --> 
         <link rel="stylesheet" href="css\animate.min.css">
+        <link rel="stylesheet" href="css\select2.min.css">
 
         <!-- Font-awesome CSS-->
         <link rel="stylesheet" href="css\font-awesome.min.css">
