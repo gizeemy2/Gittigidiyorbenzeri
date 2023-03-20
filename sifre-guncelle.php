@@ -22,13 +22,13 @@
                     <div class="row settings-wrapper">
 
                     <?php
-                    if ($_GET['durum']=="hata") {?>
+                    if (isset($_GET['durum'])=="hata") {?>
 
                     <div class="alert alert-danger">
                         <strong>Hata!</strong>İşlem Başarısız
                     </div>
                         
-                    <?php }else if ($_GET['durum']=="ok") 
+                    <?php }else if (isset($_GET['durum'])=="ok") 
                     {?>
 
                         <div class="alert alert-success">
@@ -36,7 +36,7 @@
                         </div>
                             
                         <?php }
-                        else if ($_GET['durum']=="eskisifrehata") 
+                        else if (isset($_GET['durum'])=="eskisifrehata") 
                         {?>
     
                             <div class="alert alert-danger">
@@ -44,16 +44,15 @@
                             </div>
                                 
                             <?php }
-                            else if ($_GET['durum']=="sifreleruyusmuyor") 
+                            else if (isset($_GET['durum'])=="sifreleruyusmuyor") 
                         {?>
     
                             <div class="alert alert-danger">
                                 <strong>Bilgi!</strong>Şifreler uyuşmuyor
                             </div>
                                 
-                            <?php }       else if ($_GET['durum']=="eksiksifre") 
+                            <?php }   else if (isset($_GET['durum'])=="eksiksifre") 
                         {?>
-                            
                             <div class="alert alert-danger">
                                 <strong>Bilgi!</strong>En az şifreniz 6 karakter olmalıdır
                             </div>

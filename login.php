@@ -22,7 +22,7 @@
                   
                   <?php 
 
-                if ($_GET['durum']=="hata") {?>
+                 if ($_GET['durum']=="hata") {?>
 
                 <div class="alert alert-danger">
                     <strong>Hata!</strong> Hatalı Giriş

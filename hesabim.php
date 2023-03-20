@@ -29,7 +29,7 @@
                     </div>
                         
                     <?php }
-                    if ($_GET['durum']=="ok") {?>
+                    if (isset($_GET['durum'])=="ok") {?>
 
                         <div class="alert alert-success">
                             <strong>Bilgi!</strong> Kayıtlar Güncellendi

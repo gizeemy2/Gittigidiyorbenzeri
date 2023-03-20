@@ -1,4 +1,5 @@
-﻿<?php require_once("header.php") ?>
+﻿
+<?php require_once("header.php") ?>
 <?php    
  if (!isset($_SESSION['userkullanici_id'])) {
  Header("Location:404.php");
@@ -21,32 +22,88 @@
                     <div class="row settings-wrapper">
 
                     <?php
-                    if ($_GET['durum']=="hata") {?>
+                    if (isset($_GET['durum'])=="hata") {?>
 
                     <div class="alert alert-danger">
                         <strong>Hata!</strong>İşlem Başarısız
                     </div>
                         
-                    <?php }
-                    if (isset($_GET['durum'])=="ok") {?>
+                    <?php }else if (isset($_GET['durum'])=="ok") 
+                    {?>
 
                         <div class="alert alert-success">
-                            <strong>Bilgi!</strong> Kayıtlar Güncellendi
+                            <strong>Bilgi!</strong> İşlem Başarılı
                         </div>
                             
                         <?php }
-                        
-
+                        else if (isset($_GET['durum'])=="eskisifrehata") 
+                        {?>
+    
+                            <div class="alert alert-danger">
+                                <strong>Bilgi!</strong>Eski şifre hata
+                            </div>
+                                
+                            <?php }
+                            else if (isset($_GET['durum'])=="sifreleruyusmuyor") 
+                        {?>
+    
+                            <div class="alert alert-danger">
+                                <strong>Bilgi!</strong>Şifreler uyuşmuyor
+                            </div>
+                                
+                            <?php }   else if (isset($_GET['durum'])=="eksiksifre") 
+                        {?>
+                            <div class="alert alert-danger">
+                                <strong>Bilgi!</strong>En az şifreniz 6 karakter olmalıdır
+                            </div>
+                                
+                            <?php }
                     ?>
    
                     <?php require_once 'hesap-sidebar.php' ?>                   
                         <div class="col-lg-9 col-md-9 col-sm-8 col-xs-12"> 
                         <form action="nedmin/netting/kullanici.php" method="POST" class="form-horizontal" id="personal-info-form">
-                                <div class="settings-details tab-content">
+                        <div class="settings-details tab-content">
                                     <div class="tab-pane fade active in" id="Personal">
-                                        <h2 class="title-section">Adres Bilgilerimi Güncelle</h2>
+                                        <h2 class="title-section">Mağaza Başvurusu </h2>
                                         <div class="personal-info inner-page-padding"> 
-                                           
+                                        <p>Başvuru işlemini tamamlamak için tüm bilgilerin eksiksiz girilmesi gerekmektedir.</p> 
+                                        <div class="form-group">
+                                                <label class="col-sm-3 control-label">Mail</label>
+                                                <div class="col-sm-9">
+                                                    <input class="form-control"  disabled="" value="<?php echo $kullanicicek['kullanici_mail'] ?>"   id="first-name" type="text">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-3 control-label">Banka Adı</label>
+                                                <div class="col-sm-9">
+                                                    <input class="form-control" value="<?php echo $kullanicicek['kullanici_banka'] ?>"  name="kullanici_banka" id="first-name" type="text">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-3 control-label">IBAN Numarası</label>
+                                                <div class="col-sm-9">
+                                                    <input class="form-control" value="<?php echo $kullanicicek['kullanici_iban'] ?>"  name="kullanici_iban" id="first-name" type="text">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-3 control-label">Ad</label>
+                                                <div class="col-sm-9">
+                                                    <input class="form-control" value="<?php echo $kullanicicek['kullanici_ad'] ?>"  name="kullanici_ad" id="first-name" type="text">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-3 control-label">Soyad</label>
+                                                <div class="col-sm-9">
+                                                    <input class="form-control"value="<?php echo $kullanicicek['kullanici_soyad'] ?> " name="kullanici_soyad" id="last-name" type="text">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-3 control-label">Telefon </label>
+                                                <div class="col-sm-9">
+                                                    <input class="form-control" id="company-name" value="<?php echo $kullanicicek['kullanici_gsm'] ?> " name="kullanici_gsm" type="text">
+                                                </div>
+                                            </div>
                                             <div class="form-group">
                                                 <label class="col-sm-3 control-label">Bireysel/Kurumsal</label>
                                                 <div class="col-sm-9">
@@ -120,10 +177,16 @@
                                                 </div>
                                             </div>
 
+                                            <div class="form-group">
+                                                <label class="col-sm-3 control-label">Onay</label>
+                                                <div class="checkbox">
+                                                <label><input type="checkbox" required value="">Kullanım şartlarını kabul ediyorum </label>
+                                            </div>
+                                            </div>
                                         
                                             <div class="form-group">
                                                 <div align="right"  class="col-sm-12">
-                                                    <button class="update-btn" id="login-update" name="musteriadresguncelle">Bilgileri Güncelle</button>
+                                                    <button class="update-btn" name="musterimagazabasvuru">Başvuruyu Tamamla</button>
                                                         </div>
                                             </div>                                        
                                         </div> 
@@ -137,12 +200,13 @@
                 </div>  
             </div> 
             <!-- Settings Page End Here -->
-            <?php require_once("footer.php") ;?>
+            <?php require_once("footer.php") ?>
 
             <!-- Footer Area End Here -->
         </div>
         <!-- Main Body Area End Here -->
         <!-- jquery-->  
+      
         <script type="text/javascript">
                $(document).ready(function() { 
                 $("#kullanici_tip").change(function(){
@@ -161,6 +225,6 @@
                 }).change();
 
                });
-           </script>                                                 
+           </script>                   
     </body>
 </html>

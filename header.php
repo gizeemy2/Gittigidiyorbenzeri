@@ -382,3 +382,5 @@ if (isset($_SESSION['userkullanici_mail'])) {
                 </div>  
                 <!-- Mobile Menu Area End -->
             </header>
+ 
+                                   </body>

@@ -22,31 +22,41 @@
                   
                   <?php 
 
-                if ($_GET['durum']=="farklisifre") {?>
+                if (isset($_GET['durum'])=="farklisifre") {?>
 
                 <div class="alert alert-danger">
                     <strong>Hata!</strong> Girdiğiniz şifreler eşleşmiyor.
                 </div>
                     
-                <?php } elseif ($_GET['durum']=="eksiksifre") {?>
+                <?php } elseif (isset($_GET['durum'])=="eksiksifre") {?>
 
                 <div class="alert alert-danger">
                     <strong>Hata!</strong> Şifreniz minimum 6 karakter uzunluğunda olmalıdır.
                 </div>
                     
-                <?php } elseif ($_GET['durum']=="mukerrerkayit") {?>
+                <?php } elseif (isset($_GET['durum'])=="mukerrerkayit") {?>
 
                 <div class="alert alert-danger">
                     <strong>Hata!</strong> Bu kullanıcı daha önce kayıt edilmiş.
                 </div>
                     
-                <?php } elseif ($_GET['durum']=="basarisiz") {?>
+                <?php } elseif (isset($_GET['durum'])=="basarisiz") {?>
 
                 <div class="alert alert-danger">
                     <strong>Hata!</strong> Kayıt Yapılamadı Sistem Yöneticisine Danışınız.
                 </div>
                     
                 <?php }
+
+                   elseif (isset($_GET['durum'])=="kayitok") {?>
+
+                    <div class="alert alert-success">
+                        <strong>Tebrikler!</strong> Kayıt Yapıldı.
+                    </div>
+                        
+                    <?php }
+
+
                 ?>
 
 
@@ -78,13 +88,13 @@
                                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">                                          
                                     <div class="form-group">
                                         <label class="control-label" for="first-name">Şifre *</label>
-                                        <input type="text" id="first-name" required=""  name="kullanici_passwordone" placeholder="Şifrenizi girin."class="form-control">
+                                        <input type="password" id="first-name" required=""  name="kullanici_passwordone" placeholder="Şifrenizi girin."class="form-control">
                                     </div>
                                 </div>
                                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">                                          
                                     <div class="form-group">
                                         <label class="control-label" for="last-name">Şifre Tekrar *</label>
-                                        <input type="text" id="last-name" required=""  name="kullanici_passwordtwo" placeholder="Şifrenizi tekrar girin." class="form-control">
+                                        <input type="password" id="last-name" required=""  name="kullanici_passwordtwo" placeholder="Şifrenizi tekrar girin." class="form-control">
                                     </div>
                                 </div>
 

@@ -178,6 +178,7 @@ if (isset($_POST['musterigiris'])) {
 
 
 	if (isset($_POST['musteriadresguncelle'])) {
+		
 		$kullaniciguncelle = $db->prepare("UPDATE kullanici SET
 		kullanici_tip=:kullanici_tip,
 		kullanici_tc=:kullanici_tc,
@@ -219,7 +220,7 @@ if (isset($_POST['musterigiris'])) {
 		$kullanici_password=md5($kullanici_eskipassword);
 		$kullanicisor=$db->prepare("SELECT * FROM kullanici where kullanici_password=:password");
 		$kullanicisor->execute(array(
-			'password'=>$kullanici_password
+			'password' => $kullanici_password
 		));
 
 		$say= $kullanicisor->rowCount();
@@ -230,30 +231,85 @@ if (isset($_POST['musterigiris'])) {
 
 
 		if ($kullanici_passwordone==$kullanici_passwordtwo) {
+			
 			if (strlen($kullanici_passwordone)>=6) {
 
+					$sifre = md5($kullanici_passwordone);
 
-				$kullaniciguncelle = $db->prepare("UPDATE kullanici SET
-				kullanici_password=:kullanici_password,
-		
-				WHERE kullanici_id={$_SESSION['userkullanici_id']}");
-		
-				$update = $kullaniciguncelle->execute(array(
-					'kullanici_password' => $kullanici_password
-				
-		
-				));
-				if ($update) {
-					Header("Location:../../sifre-guncelle?durum=ok");
-				}else{
-					Header("Location:../../sifre-guncelle?durum=hata");
-				}
-		
+					$kullaniciguncelle = $db->prepare("UPDATE kullanici SET
+					kullanici_password=:kullanici_password
+					WHERE kullanici_id={$_SESSION['userkullanici_id']}");
+			
+					$update = $kullaniciguncelle->execute(array(
+						'kullanici_password' => $sifre
+					
+			
+					));
+					if ($update) {
+						Header("Location:../../sifre-guncelle?durum=ok");
+					}else{
+						Header("Location:../../sifre-guncelle?durum=hata");
+					}
+
+
+
+
+			} else {
+				header("Location:../../sifre-guncelle?durum=eksiksifre");
 
 			}
-		}
-	}
+		
 
+		 } else {
+				header("Location:../../sifre-guncelle?durum=sifreleruyusmuyor");
+				exit;
+			}
+		}
+	
+
+
+		if (isset($_POST['musterimagazabasvuru'])) {
+		
+			$kullaniciguncelle = $db->prepare("UPDATE kullanici SET
+				kullanici_ad=:kullanici_ad,
+			kullanici_soyad=:kullanici_soyad,
+			kullanici_gsm=:kullanici_gsm,
+			kullanici_banka=:kullanici_banka,
+			kullanici_iban=:kullanici_iban,
+			kullanici_tip=:kullanici_tip,
+			kullanici_tc=:kullanici_tc,
+			kullanici_unvan=:kullanici_unvan,
+			kullanici_vdaire=:kullanici_vdaire,
+			kullanici_vno=:kullanici_vno,
+			kullanici_adres=:kullanici_adres,
+			kullanici_il=:kullanici_il,
+			kullanici_ilce=:kullanici_ilce
+			WHERE kullanici_id={$_SESSION['userkullanici_id']}");
+	
+			$update = $kullaniciguncelle->execute(array(
+				'kullanici_ad' =>htmlspecialchars($_POST['kullanici_ad']),
+				'kullanici_soyad' =>htmlspecialchars($_POST['kullanici_soyad']),
+				'kullanici_gsm' =>htmlspecialchars($_POST['kullanici_gsm']),
+				'kullanici_banka' =>htmlspecialchars($_POST['kullanici_banka']),
+				'kullanici_iban' =>htmlspecialchars($_POST['kullanici_iban']),
+				'kullanici_tip' =>htmlspecialchars($_POST['kullanici_tip']),
+				'kullanici_tc' =>htmlspecialchars($_POST['kullanici_tc']),
+				'kullanici_unvan' =>htmlspecialchars($_POST['kullanici_unvan']),
+				'kullanici_vdaire' =>htmlspecialchars($_POST['kullanici_vdaire']),
+				'kullanici_vno' =>htmlspecialchars($_POST['kullanici_vno']),
+				'kullanici_adres' =>htmlspecialchars($_POST['kullanici_adres']),
+				'kullanici_il' =>htmlspecialchars($_POST['kullanici_il']),
+				'kullanici_ilce' =>htmlspecialchars($_POST['kullanici_ilce'])
+	
+			));
+			if ($update) {
+				Header("Location:../../magaza-basvuru?durum=ok");
+			}else{
+				Header("Location:../../magaza-basvuru?durum=hata");
+			}
+	
+		}
+	
 
 
  ?>
