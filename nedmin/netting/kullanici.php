@@ -283,7 +283,9 @@ if (isset($_POST['musterigiris'])) {
 			kullanici_vno=:kullanici_vno,
 			kullanici_adres=:kullanici_adres,
 			kullanici_il=:kullanici_il,
-			kullanici_ilce=:kullanici_ilce
+			kullanici_ilce=:kullanici_ilce,
+			kullanici_magaza=:kullanici_magaza
+
 			WHERE kullanici_id={$_SESSION['userkullanici_id']}");
 	
 			$update = $kullaniciguncelle->execute(array(
@@ -299,11 +301,13 @@ if (isset($_POST['musterigiris'])) {
 				'kullanici_vno' =>htmlspecialchars($_POST['kullanici_vno']),
 				'kullanici_adres' =>htmlspecialchars($_POST['kullanici_adres']),
 				'kullanici_il' =>htmlspecialchars($_POST['kullanici_il']),
-				'kullanici_ilce' =>htmlspecialchars($_POST['kullanici_ilce'])
+				'kullanici_ilce' =>htmlspecialchars($_POST['kullanici_ilce']),
+				'kullanici_magaza' => 1
+
 	
 			));
 			if ($update) {
-				Header("Location:../../magaza-basvuru?durum=ok");
+				Header("Location:../../magaza-basvuru");
 			}else{
 				Header("Location:../../magaza-basvuru?durum=hata");
 			}

@@ -22,13 +22,13 @@
                     <div class="row settings-wrapper">
 
                     <?php
-                    if (isset($_GET['durum'])=="hata") {?>
+                    if ($_GET['durum']=="hata") {?>
 
                     <div class="alert alert-danger">
                         <strong>Hata!</strong>İşlem Başarısız
                     </div>
                         
-                    <?php }else if (isset($_GET['durum'])=="ok") 
+                    <?php }else if ($_GET['durum']=="ok") 
                     {?>
 
                         <div class="alert alert-success">
@@ -62,12 +62,15 @@
    
                     <?php require_once 'hesap-sidebar.php' ?>                   
                         <div class="col-lg-9 col-md-9 col-sm-8 col-xs-12"> 
-                        <form action="nedmin/netting/kullanici.php" method="POST" class="form-horizontal" id="personal-info-form">
-                        <div class="settings-details tab-content">
+                            <div class="settings-details tab-content">
                                     <div class="tab-pane fade active in" id="Personal">
                                         <h2 class="title-section">Mağaza Başvurusu </h2>
                                         <div class="personal-info inner-page-padding"> 
+                                        <?php if ($kullanicicek['kullanici_magaza']==0) { ?>
+
                                         <p>Başvuru işlemini tamamlamak için tüm bilgilerin eksiksiz girilmesi gerekmektedir.</p> 
+                                        <form action="nedmin/netting/kullanici.php" method="POST" class="form-horizontal" id="personal-info-form">
+
                                         <div class="form-group">
                                                 <label class="col-sm-3 control-label">Mail</label>
                                                 <div class="col-sm-9">
@@ -180,7 +183,7 @@
                                             <div class="form-group">
                                                 <label class="col-sm-3 control-label">Onay</label>
                                                 <div class="checkbox">
-                                                <label><input type="checkbox" required value="">Kullanım şartlarını kabul ediyorum </label>
+                                                <label><input type="checkbox" required value="" name="kullanici_onay">Kullanım şartlarını kabul ediyorum </label>
                                             </div>
                                             </div>
                                         
@@ -188,13 +191,29 @@
                                                 <div align="right"  class="col-sm-12">
                                                     <button class="update-btn" name="musterimagazabasvuru">Başvuruyu Tamamla</button>
                                                         </div>
-                                            </div>                                        
+                                            </div> 
+                                            </form> 
+
+                                            <?php }else if($kullanicicek['kullanici_magaza']==1) { ?>
+
+                                                <div class="alert alert-success">
+                                                    <strong>Bilgi! </strong>Başvuru Onay Aşamasında 
+                                                    <p>Başvurular genellikle 24 saat içerisinde incelenir ve sonuçlandırılır.</p>
+                                                </div>
+
+                                                <?php  } else if($kullanicicek['kullanici_magaza']==2){ ?>
+                                                <div class="alert alert-success">
+                                                    <strong>Bilgi! </strong>Başvuru Onaylandı 
+                                                    <p>Mağaza yönetim menüsünden mağazanızı yönetebilirsiniz</p>
+                                                </div>
+                                            <?php }?>
+                                            
                                         </div> 
                                     </div> 
                                                                          
                                 </div> 
 
-                            </form> 
+                      
                         </div>  
                     </div>  
                 </div>  

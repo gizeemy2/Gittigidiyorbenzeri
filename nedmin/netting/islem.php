@@ -139,28 +139,28 @@ if (isset($_POST['sliderduzenle'])) {
 
 // Slider Düzenleme Bitiş
 
-if ($_GET['slidersil']=="ok") {
+// if ($_GET['slidersil']=="ok") {
 
-	islemkontrol();
+// 	islemkontrol();
 	
-	$sil=$db->prepare("DELETE from slider where slider_id=:slider_id");
-	$kontrol=$sil->execute(array(
-		'slider_id' => $_GET['slider_id']
-	));
+// 	$sil=$db->prepare("DELETE from slider where slider_id=:slider_id");
+// 	$kontrol=$sil->execute(array(
+// 		'slider_id' => $_GET['slider_id']
+// 	));
 
-	if ($kontrol) {
+// 	if ($kontrol) {
 
-		$resimsilunlink=$_GET['slider_resimyol'];
-		unlink("../../$resimsilunlink");
+// 		$resimsilunlink=$_GET['slider_resimyol'];
+// 		unlink("../../$resimsilunlink");
 
-		Header("Location:../production/slider.php?durum=ok");
+// 		Header("Location:../production/slider.php?durum=ok");
 
-	} else {
+// 	} else {
 
-		Header("Location:../production/slider.php?durum=no");
-	}
+// 		Header("Location:../production/slider.php?durum=no");
+// 	}
 
-}
+// }
 
 
 
@@ -343,34 +343,6 @@ if (isset($_POST['hakkimizdakaydet'])) {
 
 
 
-if (isset($_POST['kullaniciduzenle'])) {
-
-	$kullanici_id=$_POST['kullanici_id'];
-
-	$ayarkaydet=$db->prepare("UPDATE kullanici SET
-		kullanici_tc=:kullanici_tc,
-		kullanici_adsoyad=:kullanici_adsoyad,
-		kullanici_durum=:kullanici_durum
-		WHERE kullanici_id={$_POST['kullanici_id']}");
-
-	$update=$ayarkaydet->execute(array(
-		'kullanici_tc' => $_POST['kullanici_tc'],
-		'kullanici_adsoyad' => $_POST['kullanici_adsoyad'],
-		'kullanici_durum' => $_POST['kullanici_durum']
-	));
-
-
-	if ($update) {
-
-		Header("Location:../production/kullanici-duzenle.php?kullanici_id=$kullanici_id&durum=ok");
-
-	} else {
-
-		Header("Location:../production/kullanici-duzenle.php?kullanici_id=$kullanici_id&durum=no");
-	}
-
-}
-
 
 if (isset($_POST['kullanicibilgiguncelle'])) {
 
@@ -401,28 +373,28 @@ if (isset($_POST['kullanicibilgiguncelle'])) {
 }
 
 
-if ($_GET['kullanicisil']=="ok") {
+// if ($_GET['kullanicisil']=="ok") {
 
-	$sil=$db->prepare("DELETE from kullanici where kullanici_id=:id");
-	$kontrol=$sil->execute(array(
-		'id' => $_GET['kullanici_id']
-	));
-
-
-	if ($kontrol) {
+// 	$sil=$db->prepare("DELETE from kullanici where kullanici_id=:id");
+// 	$kontrol=$sil->execute(array(
+// 		'id' => $_GET['kullanici_id']
+// 	));
 
 
-		header("location:../production/kullanici.php?sil=ok");
+// 	if ($kontrol) {
 
 
-	} else {
-
-		header("location:../production/kullanici.php?sil=no");
-
-	}
+// 		header("location:../production/kullanici.php?sil=ok");
 
 
-}
+// 	} else {
+
+// 		header("location:../production/kullanici.php?sil=no");
+
+// 	}
+
+
+// }
 
 
 if (isset($_POST['menuduzenle'])) {
@@ -463,30 +435,30 @@ if (isset($_POST['menuduzenle'])) {
 }
 
 
-if ($_GET['menusil']=="ok") {
+// if ($_GET['menusil']=="ok") {
 
-	islemkontrol();
+// 	islemkontrol();
 
-	$sil=$db->prepare("DELETE from menu where menu_id=:id");
-	$kontrol=$sil->execute(array(
-		'id' => $_GET['menu_id']
-	));
-
-
-	if ($kontrol) {
+// 	$sil=$db->prepare("DELETE from menu where menu_id=:id");
+// 	$kontrol=$sil->execute(array(
+// 		'id' => $_GET['menu_id']
+// 	));
 
 
-		header("location:../production/menu.php?sil=ok");
+// 	if ($kontrol) {
 
 
-	} else {
-
-		header("location:../production/menu.php?sil=no");
-
-	}
+// 		header("location:../production/menu.php?sil=ok");
 
 
-}
+// 	} else {
+
+// 		header("location:../production/menu.php?sil=no");
+
+// 	}
+
+
+// }
 
 
 if (isset($_POST['menukaydet'])) {
@@ -587,41 +559,41 @@ if (isset($_POST['kategoriekle'])) {
 
 
 
-if ($_GET['kategorisil']=="ok") {
+// if ($_GET['kategorisil']=="ok") {
 	
-	$sil=$db->prepare("DELETE from kategori where kategori_id=:kategori_id");
-	$kontrol=$sil->execute(array(
-		'kategori_id' => $_GET['kategori_id']
-	));
+// 	$sil=$db->prepare("DELETE from kategori where kategori_id=:kategori_id");
+// 	$kontrol=$sil->execute(array(
+// 		'kategori_id' => $_GET['kategori_id']
+// 	));
 
-	if ($kontrol) {
+// 	if ($kontrol) {
 
-		Header("Location:../production/kategori.php?durum=ok");
+// 		Header("Location:../production/kategori.php?durum=ok");
 
-	} else {
+// 	} else {
 
-		Header("Location:../production/kategori.php?durum=no");
-	}
+// 		Header("Location:../production/kategori.php?durum=no");
+// 	}
 
-}
+// }
 
-if ($_GET['urunsil']=="ok") {
+// if ($_GET['urunsil']=="ok") {
 	
-	$sil=$db->prepare("DELETE from urun where urun_id=:urun_id");
-	$kontrol=$sil->execute(array(
-		'urun_id' => $_GET['urun_id']
-	));
+// 	$sil=$db->prepare("DELETE from urun where urun_id=:urun_id");
+// 	$kontrol=$sil->execute(array(
+// 		'urun_id' => $_GET['urun_id']
+// 	));
 
-	if ($kontrol) {
+// 	if ($kontrol) {
 
-		Header("Location:../production/urun.php?durum=ok");
+// 		Header("Location:../production/urun.php?durum=ok");
 
-	} else {
+// 	} else {
 
-		Header("Location:../production/urun.php?durum=no");
-	}
+// 		Header("Location:../production/urun.php?durum=no");
+// 	}
 
-}
+// }
 
 
 
@@ -771,167 +743,167 @@ if (isset($_POST['sepetekle'])) {
 }
 
 
-if ($_GET['urun_onecikar']=="ok") {
+// if ($_GET['urun_onecikar']=="ok") {
 
 	
 
 	
-	$duzenle=$db->prepare("UPDATE urun SET
+// 	$duzenle=$db->prepare("UPDATE urun SET
 		
-		urun_onecikar=:urun_onecikar
+// 		urun_onecikar=:urun_onecikar
 		
-		WHERE urun_id={$_GET['urun_id']}");
+// 		WHERE urun_id={$_GET['urun_id']}");
 	
-	$update=$duzenle->execute(array(
+// 	$update=$duzenle->execute(array(
 
 
-		'urun_onecikar' => $_GET['urun_one']
-	));
-
-
-
-	if ($update) {
-
-		
-
-		Header("Location:../production/urun.php?durum=ok");
-
-	} else {
-
-		Header("Location:../production/urun.php?durum=no");
-	}
-
-}
-
-if ($_GET['yorum_onay']=="ok") {
-
-	
-	$duzenle=$db->prepare("UPDATE yorumlar SET
-		
-		yorum_onay=:yorum_onay
-		
-		WHERE yorum_id={$_GET['yorum_id']}");
-	
-	$update=$duzenle->execute(array(
-
-		'yorum_onay' => $_GET['yorum_one']
-	));
+// 		'urun_onecikar' => $_GET['urun_one']
+// 	));
 
 
 
-	if ($update) {
+// 	if ($update) {
 
 		
 
-		Header("Location:../production/yorum.php?durum=ok");
+// 		Header("Location:../production/urun.php?durum=ok");
 
-	} else {
+// 	} else {
 
-		Header("Location:../production/yorum.php?durum=no");
-	}
+// 		Header("Location:../production/urun.php?durum=no");
+// 	}
 
-}
+// }
 
-
-
-if ($_GET['yorumsil']=="ok") {
-	
-	$sil=$db->prepare("DELETE from yorumlar where yorum_id=:yorum_id");
-	$kontrol=$sil->execute(array(
-		'yorum_id' => $_GET['yorum_id']
-	));
-
-	if ($kontrol) {
-
-		
-		Header("Location:../production/yorum.php?durum=ok");
-
-	} else {
-
-		Header("Location:../production/yorum.php?durum=no");
-	}
-
-}
-
-
-if (isset($_POST['bankaekle'])) {
-
-	$kaydet=$db->prepare("INSERT INTO banka SET
-		banka_ad=:ad,
-		banka_durum=:banka_durum,	
-		banka_hesapadsoyad=:banka_hesapadsoyad,
-		banka_iban=:banka_iban
-		");
-	$insert=$kaydet->execute(array(
-		'ad' => $_POST['banka_ad'],
-		'banka_durum' => $_POST['banka_durum'],
-		'banka_hesapadsoyad' => $_POST['banka_hesapadsoyad'],
-		'banka_iban' => $_POST['banka_iban']		
-	));
-
-	if ($insert) {
-
-		Header("Location:../production/banka.php?durum=ok");
-
-	} else {
-
-		Header("Location:../production/banka.php?durum=no");
-	}
-
-}
-
-
-if (isset($_POST['bankaduzenle'])) {
-
-	$banka_id=$_POST['banka_id'];
-
-	$kaydet=$db->prepare("UPDATE banka SET
-
-		banka_ad=:ad,
-		banka_durum=:banka_durum,	
-		banka_hesapadsoyad=:banka_hesapadsoyad,
-		banka_iban=:banka_iban
-		WHERE banka_id={$_POST['banka_id']}");
-	$update=$kaydet->execute(array(
-		'ad' => $_POST['banka_ad'],
-		'banka_durum' => $_POST['banka_durum'],
-		'banka_hesapadsoyad' => $_POST['banka_hesapadsoyad'],
-		'banka_iban' => $_POST['banka_iban']		
-	));
-
-	if ($update) {
-
-		Header("Location:../production/banka-duzenle.php?banka_id=$banka_id&durum=ok");
-
-	} else {
-
-		Header("Location:../production/banka-duzenle.php?banka_id=$banka_id&durum=no");
-	}
-
+// if ($_GET['yorum_onay']=="ok") {
 
 	
-
-}
-
-
-if ($_GET['bankasil']=="ok") {
+// 	$duzenle=$db->prepare("UPDATE yorumlar SET
+		
+// 		yorum_onay=:yorum_onay
+		
+// 		WHERE yorum_id={$_GET['yorum_id']}");
 	
-	$sil=$db->prepare("DELETE from banka where banka_id=:banka_id");
-	$kontrol=$sil->execute(array(
-		'banka_id' => $_GET['banka_id']
-	));
+// 	$update=$duzenle->execute(array(
 
-	if ($kontrol) {
+// 		'yorum_onay' => $_GET['yorum_one']
+// 	));
+
+
+
+// 	if ($update) {
 
 		
-		Header("Location:../production/banka.php?durum=ok");
 
-	} else {
+// 		Header("Location:../production/yorum.php?durum=ok");
 
-		Header("Location:../production/banka.php?durum=no");
-	}
+// 	} else {
 
-}
+// 		Header("Location:../production/yorum.php?durum=no");
+// 	}
+
+// }
+
+
+
+// if ($_GET['yorumsil']=="ok") {
+	
+// 	$sil=$db->prepare("DELETE from yorumlar where yorum_id=:yorum_id");
+// 	$kontrol=$sil->execute(array(
+// 		'yorum_id' => $_GET['yorum_id']
+// 	));
+
+// 	if ($kontrol) {
+
+		
+// 		Header("Location:../production/yorum.php?durum=ok");
+
+// 	} else {
+
+// 		Header("Location:../production/yorum.php?durum=no");
+// 	}
+
+// }
+
+
+// if (isset($_POST['bankaekle'])) {
+
+// 	$kaydet=$db->prepare("INSERT INTO banka SET
+// 		banka_ad=:ad,
+// 		banka_durum=:banka_durum,	
+// 		banka_hesapadsoyad=:banka_hesapadsoyad,
+// 		banka_iban=:banka_iban
+// 		");
+// 	$insert=$kaydet->execute(array(
+// 		'ad' => $_POST['banka_ad'],
+// 		'banka_durum' => $_POST['banka_durum'],
+// 		'banka_hesapadsoyad' => $_POST['banka_hesapadsoyad'],
+// 		'banka_iban' => $_POST['banka_iban']		
+// 	));
+
+// 	if ($insert) {
+
+// 		Header("Location:../production/banka.php?durum=ok");
+
+// 	} else {
+
+// 		Header("Location:../production/banka.php?durum=no");
+// 	}
+
+// }
+
+
+// if (isset($_POST['bankaduzenle'])) {
+
+// 	$banka_id=$_POST['banka_id'];
+
+// 	$kaydet=$db->prepare("UPDATE banka SET
+
+// 		banka_ad=:ad,
+// 		banka_durum=:banka_durum,	
+// 		banka_hesapadsoyad=:banka_hesapadsoyad,
+// 		banka_iban=:banka_iban
+// 		WHERE banka_id={$_POST['banka_id']}");
+// 	$update=$kaydet->execute(array(
+// 		'ad' => $_POST['banka_ad'],
+// 		'banka_durum' => $_POST['banka_durum'],
+// 		'banka_hesapadsoyad' => $_POST['banka_hesapadsoyad'],
+// 		'banka_iban' => $_POST['banka_iban']		
+// 	));
+
+// 	if ($update) {
+
+// 		Header("Location:../production/banka-duzenle.php?banka_id=$banka_id&durum=ok");
+
+// 	} else {
+
+// 		Header("Location:../production/banka-duzenle.php?banka_id=$banka_id&durum=no");
+// 	}
+
+
+	
+
+// }
+
+
+// if ($_GET['bankasil']=="ok") {
+	
+// 	$sil=$db->prepare("DELETE from banka where banka_id=:banka_id");
+// 	$kontrol=$sil->execute(array(
+// 		'banka_id' => $_GET['banka_id']
+// 	));
+
+// 	if ($kontrol) {
+
+		
+// 		Header("Location:../production/banka.php?durum=ok");
+
+// 	} else {
+
+// 		Header("Location:../production/banka.php?durum=no");
+// 	}
+
+// }
 
 
 
