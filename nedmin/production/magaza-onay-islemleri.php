@@ -21,7 +21,7 @@ $kullanicicek=$kullanicisor->fetch(PDO::FETCH_ASSOC);
       <div class="col-md-12 col-sm-12 col-xs-12">
         <div class="x_panel">
           <div class="x_title">
-            <h2>Kullanıcı Düzenleme <small>
+            <h2>Mağaza Onay İşlemleri <small>
 
               <?php 
 
@@ -76,15 +76,64 @@ $kullanicicek=$kullanicisor->fetch(PDO::FETCH_ASSOC);
                 <div class="col-md-6 col-sm-6 col-xs-12">
                 <input type="" id="first-name" name="kullanici_tc" disabled="" value="<?php echo $kullanicicek['kullanici_zaman']; ?>" required="required" class="form-control col-md-7 col-xs-12">
                 </div>
+              </div> 
+              <div class="form-group">
+                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Mail <span class="required">*</span>
+                </label>
+                <div class="col-md-6 col-sm-6 col-xs-12">
+                  <input type="text" id="first-name" name="kullanici_mail" disabled  value="<?php echo $kullanicicek['kullanici_mail'] ?>" required="required" class="form-control col-md-7 col-xs-12">
+                </div>
               </div>
 
-
+              <div class="form-group">
+                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Üye İşyeri Tip <span class="required">*</span>
+                </label>
+                <div class="col-md-6 col-sm-6 col-xs-12">
+                <input type="text" id="kullanici_tip" disabled value="<?php echo $kullanicicek['kullanici_tip'] ?>" required="required" class="form-control col-md-7 col-xs-12">                </div>
+              </div>
+                <div id="tc">
               <div class="form-group">
                 <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Tc <span class="required">*</span>
                 </label>
                 <div class="col-md-6 col-sm-6 col-xs-12">
-
                 <input type="text" id="first-name" name="kullanici_tc" value="<?php echo $kullanicicek['kullanici_tc'] ?>" required="required" class="form-control col-md-7 col-xs-12">                </div>
+              </div>
+                </div>
+              <div id="kurumsal">
+              <div class="form-group">
+                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Firma Unvanı <span class="required">*</span>
+                </label>
+                <div class="col-md-6 col-sm-6 col-xs-12">
+                <input type="text" id="first-name" name="kullanici_unvan" value="<?php echo $kullanicicek['kullanici_unvan'] ?>"  class="form-control col-md-7 col-xs-12">                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Vergi Dairesi <span class="required">*</span>
+                </label>
+                <div class="col-md-6 col-sm-6 col-xs-12">
+                <input type="text" id="first-name" name="kullanici_vdaire" value="<?php echo $kullanicicek['kullanici_vdaire'] ?>"  class="form-control col-md-7 col-xs-12">                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Vergi No <span class="required">*</span>
+                </label>
+                <div class="col-md-6 col-sm-6 col-xs-12">
+                <input type="text" id="first-name" name="kullanici_vno" value="<?php echo $kullanicicek['kullanici_vno'] ?>"  class="form-control col-md-7 col-xs-12">                </div>
+              </div>
+              </div>
+              <div class="form-group">
+                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Banka <span class="required">*</span>
+                </label>
+                <div class="col-md-6 col-sm-6 col-xs-12">
+                  <input type="text" id="first-name" name="kullanici_banka" value="<?php echo $kullanicicek['kullanici_banka']?>" required="required" class="form-control col-md-7 col-xs-12">
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">IBAN<span class="required">*</span>
+                </label>
+                <div class="col-md-6 col-sm-6 col-xs-12">
+                  <input type="text" id="first-name" name="kullanici_iban" value="<?php echo $kullanicicek['kullanici_iban']." ". $kullanicicek['kullanici_soyad'] ?>" required="required" class="form-control col-md-7 col-xs-12">
+                </div>
               </div>
 
               <div class="form-group">
@@ -102,14 +151,7 @@ $kullanicicek=$kullanicisor->fetch(PDO::FETCH_ASSOC);
                   <input type="text" id="first-name" name="kullanici_gsm" value="<?php echo $kullanicicek['kullanici_gsm']?>" required="required" class="form-control col-md-7 col-xs-12">
                 </div>
               </div>
-              <div class="form-group">
-                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Mail <span class="required">*</span>
-                </label>
-                <div class="col-md-6 col-sm-6 col-xs-12">
-                  <input type="text" id="first-name" name="kullanici_mail"   value="<?php echo $kullanicicek['kullanici_mail'] ?>" required="required" class="form-control col-md-7 col-xs-12">
-                </div>
-              </div>
-
+           
               <div class="form-group">
                 <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Adres <span class="required">*</span>
                 </label>
@@ -186,7 +228,9 @@ $kullanicicek=$kullanicisor->fetch(PDO::FETCH_ASSOC);
              <div class="ln_solid"></div>
              <div class="form-group">
               <div align="right" class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-                <button type="submit" name="adminkullaniciduzenle" class="btn btn-success">Güncelle</button>
+                <button type="submit" name="magazaonaykayit" class="btn btn-success">Başvuruyu Onayla</button>
+                <a onclick="return confirm('Mağaza başvurusunu iptal etmek istiyor musunuz?')"  class="btn btn-danger" href="../netting/adminislem.php?magazaonay=red&kullanici_id=<?php echo $kullanicicek['kullanici_id']; ?>">
+                Başvuruyu İptal Et</a>
               </div>
             </div>
 
@@ -211,4 +255,24 @@ $kullanicicek=$kullanicisor->fetch(PDO::FETCH_ASSOC);
 </div>
 <!-- /page content -->
 
+
 <?php include 'footer.php'; ?>
+<script type="text/javascript">
+               $(document).ready(function() { 
+                $("#kullanici_tip").change(function(){
+
+                    var tip=$("#kullanici_tip").val();
+                    if (tip=="PERSONAL") {
+
+                        $("#kurumsal").hide();
+                        $("#tc").show();
+                    }
+                    else if (tip=="PRIVATE_COMPANY") {
+                        $("#kurumsal").show();
+                        $("#tc").hide();
+                    }
+
+                }).change();
+
+               });
+           </script>     

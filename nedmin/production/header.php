@@ -147,7 +147,11 @@ if (!isset($_SESSION['kullanici_mail'])) {
              </li>
 
              <li><a href="hakkimizda.php"><i class="fa fa-info"></i> Hakkımızda </a></li>
-
+             
+             <li><a href="magazalar.php"><i class="fa fa-shopping-basket"></i> Mağazalar </a></li>
+             
+             <li><a href="magaza-onay.php"><i class="fa fa-shopping-basket"></i> Mağaza Başvuruları </a></li>
+           
              <li><a href="kullanici.php"><i class="fa fa-user"></i> Kullanıcılar </a></li>
 
              <li><a href="urun.php"><i class="fa fa-shopping-basket"></i> Ürünler </a></li>

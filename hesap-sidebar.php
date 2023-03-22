@@ -8,6 +8,7 @@
                                <li><a href="hesabim">Siparişlerim</a></li>
                                 <li><a href="hesabim">Hesap Bilgilerim</a></li>
                                 <li><a href="adres-bilgileri" >Adres Bilgilerim</a></li>
+                                <li><a href="profil-resim-guncelle">Profil Resim Güncelle</a></li>
                                 <li><a href="sifre-guncelle" >Şifre Güncelle</a></li>
                             </ul>
                           
