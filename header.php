@@ -79,6 +79,7 @@ if (isset($_SESSION['userkullanici_mail'])) {
 
         <!-- Custom CSS -->
         <link rel="stylesheet" href="style.css">
+        <script src="https://cdn.ckeditor.com/4.7.1/standard/ckeditor.js"></script>
 
         <!-- Modernizr Js -->
         <script src="js\modernizr-2.8.3.min.js"></script>

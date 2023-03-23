@@ -18,8 +18,8 @@
                                 <hr>            
                             <ul class="settings-title">
                                 <li class="active"><a href="javascript:void(0)" data-toggle="tab" aria-expanded="false"><b>MAĞAZA İŞLEMLERİ</b></a></li>
-                                <li><a href="magaza-basvuru" >Ürün Ekle</a></li>                               
-                                <li><a href="hesabim">Ürünlerim</a></li>
+                                <li><a href="urun-ekle" >Ürün Ekle</a></li>                               
+                                <li><a href="urunlerim">Ürünlerim</a></li>
                                 <li><a href="adres-bilgileri" >Yeni Siparişler</a></li>
                                 <li><a href="sifre-guncelle" >Tamamlanan Siparişler</a></li>
                                 <li><a href="sifre-guncelle" >Mesajlar</a></li>

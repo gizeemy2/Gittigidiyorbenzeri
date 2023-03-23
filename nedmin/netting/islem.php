@@ -559,41 +559,41 @@ if (isset($_POST['kategoriekle'])) {
 
 
 
-// if ($_GET['kategorisil']=="ok") {
+if ($_GET['kategorisil']=="ok") {
 	
-// 	$sil=$db->prepare("DELETE from kategori where kategori_id=:kategori_id");
-// 	$kontrol=$sil->execute(array(
-// 		'kategori_id' => $_GET['kategori_id']
-// 	));
+	$sil=$db->prepare("DELETE from kategori where kategori_id=:kategori_id");
+	$kontrol=$sil->execute(array(
+		'kategori_id' => $_GET['kategori_id']
+	));
 
-// 	if ($kontrol) {
+	if ($kontrol) {
 
-// 		Header("Location:../production/kategori.php?durum=ok");
+		Header("Location:../production/kategori.php?durum=ok");
 
-// 	} else {
+	} else {
 
-// 		Header("Location:../production/kategori.php?durum=no");
-// 	}
+		Header("Location:../production/kategori.php?durum=no");
+	}
 
-// }
+}
 
-// if ($_GET['urunsil']=="ok") {
+if ($_GET['urunsil']=="ok") {
 	
-// 	$sil=$db->prepare("DELETE from urun where urun_id=:urun_id");
-// 	$kontrol=$sil->execute(array(
-// 		'urun_id' => $_GET['urun_id']
-// 	));
+	$sil=$db->prepare("DELETE from urun where urun_id=:urun_id");
+	$kontrol=$sil->execute(array(
+		'urun_id' => $_GET['urun_id']
+	));
 
-// 	if ($kontrol) {
+	if ($kontrol) {
 
-// 		Header("Location:../production/urun.php?durum=ok");
+		Header("Location:../production/urun.php?durum=ok");
 
-// 	} else {
+	} else {
 
-// 		Header("Location:../production/urun.php?durum=no");
-// 	}
+		Header("Location:../production/urun.php?durum=no");
+	}
 
-// }
+}
 
 
 

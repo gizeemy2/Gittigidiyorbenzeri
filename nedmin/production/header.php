@@ -74,8 +74,8 @@ if (!isset($_SESSION['kullanici_mail'])) {
 
   <script src="../vendors/dropzone/dist/min/dropzone.min.js"></script>
   <!-- Ck Editör -->
-  <!--<script src="https://cdn.ckeditor.com/4.7.1/standard/ckeditor.js"></script>-->
-   <script src="ckeditor/ckeditor.js"></script>
+  <script src="https://cdn.ckeditor.com/4.7.1/standard/ckeditor.js"></script>
+  <script src="/nedmin/production/ckeditor/ckeditor.js"></script>
 
 
   <!-- Custom Theme Style -->

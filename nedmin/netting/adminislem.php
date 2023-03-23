@@ -242,4 +242,82 @@ if (isset($_POST['kullaniciresimguncelle'])) {
 }
 
 
+if (isset($_POST['magazaurunekle'])) {
+
+	
+	if ($_FILES['kullanici_magazafoto']['size']>1048576) {
+		
+		echo "Bu dosya boyutu çok büyük";
+
+		Header("Location:../../urun-ekle.php?durum=dosyabuyuk");
+
+	}
+
+
+	$izinli_uzantilar=array('jpg','gif','png');
+
+	//echo $_FILES['ayar_logo']["name"];
+
+	$ext=strtolower(substr($_FILES['urunfoto_resimyol']["name"],strpos($_FILES['urunfoto_resimyol']["name"],'.')+1));
+
+	if (in_array($ext, $izinli_uzantilar) === false) {
+		echo "Bu uzantı kabul edilmiyor";
+		Header("Location:../../urun-ekle.php?durum=formathata");
+
+		exit;
+	}
+
+
+
+	@$tmp_name = $_FILES['urunfoto_resimyol']["tmp_name"];
+	@$name = seo($_FILES['urunfoto_resimyol']["name"]);
+
+
+	// include('SimpleImage.php');
+	// $image=new SimpleImage();
+	// $image->load($tmp_name);
+	// $image->resize(829,422);
+	// $image->save($tmp_name);
+
+	$uploads_dir = '../../eticarets/dimg/urunfoto';
+
+	$benzersizsayi4=rand(20000,32000);
+	$refimgyol=substr($uploads_dir, 6)."/".$benzersizsayi4.".".$ext;
+
+	@move_uploaded_file($tmp_name, "$uploads_dir/$benzersizsayi4.$ext");
+
+	
+	$duzenle=$db->prepare("INSERT INTO urun SET
+		kategori_id=:kategori_id,
+		kullanici_id=:kullanici_id,
+		urun_ad=:urun_ad,
+		urun_detay=:urun_detay,
+		urun_fiyat=:urun_fiyat,
+		urunfoto_resimyol=:urunfoto_resimyol "
+	);
+
+	$update=$duzenle->execute(array(
+		'kategori_id' => htmlspecialchars($_POST['kategori_id']),
+		'kullanici_id' => htmlspecialchars($_SESSION['userkullanici_id']),
+		'urun_ad' => htmlspecialchars($_POST['urun_ad']),
+		'urun_detay' => htmlspecialchars($_POST['urun_detay']),
+		'urun_fiyat' => htmlspecialchars($_POST['urun_fiyat']),
+		'urunfoto_resimyol' => $refimgyol
+
+	));
+
+	if ($update) {
+
+
+		Header("Location:../../urunlerim.php?durum=ok");
+		
+
+	} else {
+
+		Header("Location:../../urun-ekle.php?durum=hata");
+	}
+
+}
+
+
 ?>
