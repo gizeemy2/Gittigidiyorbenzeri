@@ -60,7 +60,7 @@ $kategoricek=$kategorisor->fetch(PDO::FETCH_ASSOC);
             <br />
 
             <!-- / => en kök dizine çık ... ../ bir üst dizine çık -->
-            <form action="../netting/islem.php" method="POST" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
+            <form action="../netting/adminislem.php" method="POST" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
 
               
 
@@ -83,6 +83,20 @@ $kategoricek=$kategorisor->fetch(PDO::FETCH_ASSOC);
                 </div>
               </div>
 
+              
+              <div class="form-group">
+                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Ürün Öne Çıkar<span class="required">*</span>
+                </label>
+                <div class="col-md-6 col-sm-6 col-xs-12">
+                 <select id="heard" class="form-control" name="kategori_onecikar" required>
+                  <option value="1" <?php echo $kategoricek['kategori_onecikar'] == '1' ? 'selected=""' : ''; ?>>Evet</option>
+                  <option value="0" <?php if ($kategoricek['kategori_onecikar']== '0' ) { echo 'selected=""'; } ?>>Hayır</option>
+        
+                 </select>
+               </div>
+             </div>
+
+
 
 
 
@@ -92,40 +106,14 @@ $kategoricek=$kategorisor->fetch(PDO::FETCH_ASSOC);
               </label>
               <div class="col-md-6 col-sm-6 col-xs-12">
                <select id="heard" class="form-control" name="kategori_durum" required>
-
-
-
-                   <!-- Kısa İf Kulllanımı 
-
-                    <?php echo $kategoricek['kategori_durum'] == '1' ? 'selected=""' : ''; ?>
-
-                  -->
-
-
-
+              
 
                   <option value="1" <?php echo $kategoricek['kategori_durum'] == '1' ? 'selected=""' : ''; ?>>Aktif</option>
 
 
 
                   <option value="0" <?php if ($kategoricek['kategori_durum']==0) { echo 'selected=""'; } ?>>Pasif</option>
-                  <!-- <?php 
-
-                   if ($kategoricek['kategori_durum']==0) {?>
-
-
-                   <option value="0">Pasif</option>
-                   <option value="1">Aktif</option>
-
-
-                   <?php } else {?>
-
-                   <option value="1">Aktif</option>
-                   <option value="0">Pasif</option>
-
-                   <?php  }
-
-                   ?> -->
+                
 
 
                  </select>

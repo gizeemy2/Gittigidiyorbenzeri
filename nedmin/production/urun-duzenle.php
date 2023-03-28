@@ -50,6 +50,14 @@ $uruncek=$urunsor->fetch(PDO::FETCH_ASSOC);
 
 
 
+            <div class="form-group">
+                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Ürün Resim <span class="required">*</span>
+                </label>
+                <div class="col-md-6 col-sm-6 col-xs-12">
+                <img width="200"  src="../../<?php echo $uruncek['urunfoto_resimyol'] ?>">
+              </div>
+              </div>
+
               <!-- Kategori seçme başlangıç -->
 
 
@@ -144,30 +152,6 @@ $uruncek=$urunsor->fetch(PDO::FETCH_ASSOC);
                 </label>
                 <div class="col-md-6 col-sm-6 col-xs-12">
                   <input type="text" id="first-name" name="urun_fiyat" value="<?php echo $uruncek['urun_fiyat'] ?>"  class="form-control col-md-7 col-xs-12">
-                </div>
-              </div>
-
-              <div class="form-group">
-                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Ürün Video <span class="required">*</span>
-                </label>
-                <div class="col-md-6 col-sm-6 col-xs-12">
-                  <input type="text" id="first-name" name="urun_video" value="<?php echo $uruncek['urun_video'] ?>" class="form-control col-md-7 col-xs-12">
-                </div>
-              </div>
-
-              <div class="form-group">
-                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Ürün Keyword <span class="required">*</span>
-                </label>
-                <div class="col-md-6 col-sm-6 col-xs-12">
-                  <input type="text" id="first-name" name="urun_keyword" value="<?php echo $uruncek['urun_keyword'] ?>" required="required" class="form-control col-md-7 col-xs-12">
-                </div>
-              </div>
-
-              <div class="form-group">
-                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Ürün Stok <span class="required">*</span>
-                </label>
-                <div class="col-md-6 col-sm-6 col-xs-12">
-                  <input type="text" id="first-name" name="urun_stok" value="<?php echo $uruncek['urun_stok'] ?>" required="required" class="form-control col-md-7 col-xs-12">
                 </div>
               </div>
 

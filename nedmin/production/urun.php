@@ -6,7 +6,6 @@ include 'header.php';
 $urunsor=$db->prepare("SELECT * FROM urun order by urun_id DESC");
 $urunsor->execute();
 
-
 ?>
 
 
@@ -55,9 +54,7 @@ $urunsor->execute();
                 <tr>
                   <th>S.No</th>
                   <th>Ürün Ad</th>
-                  <th>Ürün Stok</th>
                   <th>Ürün Fiyat</th>
-                  <th>Resim İşlemleri</th>
                   <th>Öne Çıkar</th>
                   <th>Durum</th>
                   <th></th>
@@ -77,9 +74,7 @@ $urunsor->execute();
                 <tr>
                  <td width="20"><?php echo $say ?></td>
                  <td><?php echo $uruncek['urun_ad'] ?></td>
-                 <td><?php echo $uruncek['urun_stok'] ?></td>
                  <td><?php echo $uruncek['urun_fiyat'] ?></td>
-                 <td><center><a href="urun-galeri.php?urun_id=<?php echo $uruncek['urun_id'] ?>"><button class="btn btn-success btn-xs">Resim İşlemleri</button></a></center></td>
                  <td><center><?php 
 
                  if ($uruncek['urun_onecikar']==0) {?>
@@ -129,7 +124,7 @@ $urunsor->execute();
 
 
             <td><center><a href="urun-duzenle.php?urun_id=<?php echo $uruncek['urun_id']; ?>"><button class="btn btn-primary btn-xs">Düzenle</button></a></center></td>
-            <td><center><a href="../netting/islem.php?urun_id=<?php echo $uruncek['urun_id']; ?>&urunsil=ok"><button class="btn btn-danger btn-xs">Sil</button></a></center></td>
+            <td><center><a onclick="return confirm('Bu ürünü silmek istediğinize emin misiniz ?')"  href="../netting/islem.php?urun_id=<?php echo $uruncek['urun_id']; ?>&urunsil=ok"><button class="btn btn-danger btn-xs">Sil</button></a></center></td>
           </tr>
 
 

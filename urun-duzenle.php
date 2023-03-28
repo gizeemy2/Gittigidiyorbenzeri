@@ -1,10 +1,15 @@
 ﻿<?php require_once("header.php") ?>
 <?php    
- if (!isset($_SESSION['userkullanici_id'])) {
- Header("Location:404.php");
- 
- exit;   
-}?>
+
+ $urunsor=$db->prepare("SELECT * FROM urun WHERE kullanici_id=:kullanici_id AND urun_id=:urun_id order by urun_zaman DESC");
+ $urunsor->execute(array(
+  'kullanici_id' => $_SESSION['userkullanici_id'],
+  'urun_id' => $_GET['urun_id']
+ ));
+$uruncek=$urunsor->fetch(PDO::FETCH_ASSOC);
+
+
+?>
                 <!-- Inner Page Banner Area Start Here -->
             <div class="pagination-area bg-secondary">
                 <div class="container">
@@ -45,15 +50,15 @@
                         <form action="nedmin/netting/adminislem.php" method="POST" enctype="multipart/form-data"   class="form-horizontal" id="personal-info-form">
                                 <div class="settings-details tab-content">
                                     <div class="tab-pane fade active in" id="Personal">
-                                        <h2 class="title-section">Ürün Düzenle</h2>
+                                        <h2 class="title-section">Ürün Düzenleme</h2>
                                         <div class="personal-info inner-page-padding"> 
                                         <div class="form-group">
-                                                <label  class="col-sm-3 control-label">Ürün fotoğrafı</label>
+                                                <label  class="col-sm-3 control-label">Mevcut fotoğrafı</label>
                                                 <div class="col-sm-9">
-                                                <img src="<?php echo $uruncek['urunfoto_resimyol']; ?>" >
+                                                    <img width="200" src="<?php echo $uruncek['urunfoto_resimyol']?>"> 
+                                                </div>
                                             </div>
-                                            </div>
-                                            <div class="form-group">
+                                        <div class="form-group">
                                                 <label  class="col-sm-3 control-label">Ürün fotoğrafı</label>
                                                 <div class="col-sm-9">
                                                     <input required class="form-control" id="first-name" name="urunfoto_resimyol" type="file" >
@@ -70,7 +75,9 @@
 
                                                         while($kategoricek=$kategorisor->fetch(PDO::FETCH_ASSOC)) {
                                                          ?>  
-                                                        <option value="<?php echo $kategoricek['kategori_id'] ?>"><?php echo $kategoricek['kategori_ad']?></option>
+                                                        <option <?php if ($kategoricek['kategori_id']==$uruncek['kategori_id']) {
+                                                             echo "selected";
+                                                        } ?> value="<?php echo $kategoricek['kategori_id'] ?>"><?php echo $kategoricek['kategori_ad']?></option>
                                                           <?php } ?>
                                                         </select>
                                                     </div>
@@ -79,25 +86,27 @@
                                             <div class="form-group">
                                                 <label class="col-sm-3 control-label">Ürün Adı</label>
                                                 <div class="col-sm-9">
-                                                    <input class="form-control" id="first-name" required="" name="urun_ad" placeholder="Ürün Adı.." >
+                                                    <input class="form-control" id="first-name" required="" name="urun_ad" value="<?php echo $uruncek['urun_ad'] ?>" >
                                                 </div>
                                             </div>
-                                           
                                             <div class="form-group">
                                                 <label class="col-sm-3 control-label">Ürün Açıklama</label>
                                                 <div class="col-sm-9">
-                                                <textarea  class="ckeditor" id="editor1" name="urun_detay" placeholder="Ürün Açıklaması"></textarea>
+                                                <textarea  class="ckeditor" id="editor1" name="urun_detay" ><?php echo $uruncek['urun_detay'] ?></textarea>
                                             </div>
                                             </div>
                                            <div class="form-group">
                                                 <label class="col-sm-3 control-label">Ürün Fiyatı</label>
                                                 <div class="col-sm-9">
-                                                    <input class="form-control" id="first-name" required="" name="urun_fiyat" placeholder="Ürün fiyatını girin.." >
+                                                    <input class="form-control" id="first-name" required="" name="urun_fiyat" value="<?php echo $uruncek['urun_fiyat'] ?>" >
                                                 </div>
                                             </div>
+                                             <input type="hidden" value="<?php echo $uruncek['urun_id'] ?>" name="urun_id">           
+                                             <input type="hidden" value="<?php echo $uruncek['urunfoto_resimyol'] ?>" name="eski_yol">           
+
                                             <div class="form-group">
                                                 <div align="right"  class="col-sm-12">
-                                                    <button class="update-btn" id="login-update" name="magazaurunekle">Ürün Ekle</button>
+                                                    <button class="update-btn" id="login-update" name="magazaurunduzenle">Ürün Düzenle</button>
                                                         </div>
                                             </div>                                        
                                         </div> 

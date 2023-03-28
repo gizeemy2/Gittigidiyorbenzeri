@@ -54,9 +54,15 @@
                                             <th scope="row"><?php echo $say ?></th>
                                             <td><?php echo $uruncek['urun_zaman']?></td>
                                             <td><?php echo $uruncek['urun_ad']?></td>
-                                            <td><button class="btn btn-primary btn-xs">Düzenle</button></td>
-                                            <td><button class="btn btn-danger btn-xs">Yayından Kaldır</button></td>
-
+                                            <td><a href="urun-duzenle?urun_id=<?php echo $uruncek['urun_id'] ?>"><button class="btn btn-primary btn-xs">Düzenle</button></td>
+                                            <td>
+                                            <?php 
+                                            if ($uruncek['urun_durum']==0) {     ?>
+                                            <button class="btn btn-warning btn-xs">Onay Bekliyor</button>
+                                            <?php } else { ?>
+                                              <a onclick="return confirm('Bu ürünü silmek istediğinizden emin misiniz?')" href="nedmin/netting/adminislem.php?urunsil=ok&urun_id=<?php echo $uruncek['urun_id'] ?>&urunfoto_resimyol=<?php echo $uruncek['urunfoto_resimyol'] ?>"><button class="btn btn-danger btn-s">Sil</button>
+                                            <?php   }  ?>
+                                            </td>
                                             </tr>
                                          <?php } ?>
                                         </tbody>

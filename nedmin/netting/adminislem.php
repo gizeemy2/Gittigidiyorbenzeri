@@ -112,7 +112,7 @@ if (isset($_POST['adminkullaniciduzenle'])) {
 
 
 
-if ($_GET['magazaonay']=="red") {
+if (isset($_GET['magazaonay'])=="red") {
 		
 	
 	$kullaniciguncelle = $db->prepare("UPDATE kullanici SET
@@ -315,6 +315,166 @@ if (isset($_POST['magazaurunekle'])) {
 	} else {
 
 		Header("Location:../../urun-ekle.php?durum=hata");
+	}
+
+}
+
+//Mağaza urun düzenleme
+
+if (isset($_POST['magazaurunduzenle'])) {
+
+	if (isset($_FILES['kullanici_magazafoto']['size'])>0) {
+	
+	if ($_FILES['kullanici_magazafoto']['size']>1048576) {
+		
+		echo "Bu dosya boyutu çok büyük";
+
+		Header("Location:../../urun-duzenle.php?durum=dosyabuyuk");
+
+	}
+
+
+	$izinli_uzantilar=array('jpg','gif','png');
+
+	//echo $_FILES['ayar_logo']["name"];
+
+	$ext=strtolower(substr($_FILES['urunfoto_resimyol']["name"],strpos($_FILES['urunfoto_resimyol']["name"],'.')+1));
+
+	if (in_array($ext, $izinli_uzantilar) === false) {
+		echo "Bu uzantı kabul edilmiyor";
+		Header("Location:../../urun-duzenle.php?durum=formathata");
+
+		exit;
+	}
+
+
+
+	@$tmp_name = $_FILES['urunfoto_resimyol']["tmp_name"];
+	@$name = seo($_FILES['urunfoto_resimyol']["name"]);
+
+
+	// include('SimpleImage.php');
+	// $image=new SimpleImage();
+	// $image->load($tmp_name);
+	// $image->resize(829,422);
+	// $image->save($tmp_name);
+
+	$uploads_dir = '../../eticarets/dimg/urunfoto';
+
+	$benzersizsayi4=rand(20000,32000);
+	$refimgyol=substr($uploads_dir, 6)."/".$benzersizsayi4.".".$ext;
+
+	@move_uploaded_file($tmp_name, "$uploads_dir/$benzersizsayi4.$ext");
+
+	
+	$duzenle=$db->prepare("UPDATE urun SET
+		kategori_id=:kategori_id,
+		urun_ad=:urun_ad,
+		urun_detay=:urun_detay,
+		urun_fiyat=:urun_fiyat,
+		urunfoto_resimyol=:urunfoto_resimyol 
+		WHERE urun_id={$_POST['urun_id']}");
+
+	$update=$duzenle->execute(array(
+		'kategori_id' => htmlspecialchars($_POST['kategori_id']),
+		'urun_ad' => htmlspecialchars($_POST['urun_ad']),
+		'urun_detay' => htmlspecialchars($_POST['urun_detay']),
+		'urun_fiyat' => htmlspecialchars($_POST['urun_fiyat']),
+		'urunfoto_resimyol' => $refimgyol
+
+	));
+
+	$urun_id=$_POST['urun_id'];
+
+	if ($update) {
+
+		$resimsilunlink=$_POST['eski_yol'];
+		unlink("../../$resimsilunlink");
+		Header("Location:../../urun-duzenle.php?durum=ok&urun_id=$urun_id");
+		
+
+	} else {
+
+		Header("Location:../../urun-duzenle.php?durum=hata&urun_id=$urun_id");
+	}
+	}else {
+	
+		$duzenle=$db->prepare("UPDATE urun SET
+		kategori_id=:kategori_id,
+		urun_ad=:urun_ad,
+		urun_detay=:urun_detay,
+		urun_fiyat=:urun_fiyat
+		WHERE urun_id={$_POST['urun_id']}");
+
+	$update=$duzenle->execute(array(
+		'kategori_id' => htmlspecialchars($_POST['kategori_id']),
+		'urun_ad' => htmlspecialchars($_POST['urun_ad']),
+		'urun_detay' => htmlspecialchars($_POST['urun_detay']),
+		'urun_fiyat' => htmlspecialchars($_POST['urun_fiyat'])
+	));
+
+	$urun_id=$_POST['urun_id'];
+
+	if ($update) {
+ 
+		Header("Location:../../urun-duzenle.php?durum=ok&urun_id=$urun_id");
+		
+
+	} else {
+
+		Header("Location:../../urun-duzenle.php?durum=hata&urun_id=$urun_id");
+	}	
+}
+}
+
+//Ürün silme işlemi
+if ($_GET['urunsil']=="ok") {
+	
+	$sil=$db->prepare("DELETE from urun where urun_id=:urun_id");
+	$kontrol=$sil->execute(array(
+		'urun_id' => $_GET['urun_id']
+	));
+
+	if ($kontrol) {
+
+		$resimsilunlink=$_POST['urunfoto_resimyol'];
+		unlink("../../$resimsilunlink");
+		Header("Location:../../urunlerim.php?durum=ok");
+
+	} else {
+
+		Header("Location:../../urunlerim.php?durum=hata");
+	}
+
+}
+if (isset($_POST['kategoriduzenle'])) {
+
+	$kategori_id=$_POST['kategori_id'];
+	$kategori_seourl=seo($_POST['kategori_ad']);
+
+	
+	$kaydet=$db->prepare("UPDATE kategori SET
+		kategori_ad=:ad,
+		kategori_durum=:kategori_durum,	
+		kategori_onecikar =:kategori_onecikar,
+		kategori_seourl=:seourl,
+		kategori_sira=:sira
+		WHERE kategori_id={$_POST['kategori_id']}");
+	$update=$kaydet->execute(array(
+		'ad' => htmlspecialchars($_POST['kategori_ad']),
+		'kategori_durum' => htmlspecialchars($_POST['kategori_durum']),
+		'kategori_onecikar' => htmlspecialchars($_POST['kategori_onecikar']),
+		'seourl' => $kategori_seourl,
+		'sira' => $_POST['kategori_sira']		
+	));
+
+	if ($update) {
+
+		Header("Location:../production/kategori-duzenle.php?durum=ok&kategori_id=$kategori_id");
+
+	} else {
+
+		Header("Location:../production/kategori-duzenle.php?durum=no&kategori_id=$kategori_id");
 	}
 
 }
